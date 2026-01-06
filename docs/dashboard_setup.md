@@ -76,20 +76,24 @@
 - **プロパティ名**: `内訳`
 - **数式**:
   ```javascript
-  "限定: " +
+  "限定キャラ: " +
     prop("Gacha Logs")
       .filter(
         current.prop("Gacha Type") == "301" ||
           current.prop("Gacha Type") == "400"
       )
       .length() +
-    " / 武器: " +
+    " / 限定武器: " +
     prop("Gacha Logs")
       .filter(current.prop("Gacha Type") == "302")
       .length() +
-    " / 恒常: " +
+    " / 通常祈願: " +
     prop("Gacha Logs")
       .filter(current.prop("Gacha Type") == "200")
+      .length() +
+    " / 集録祈願: " +
+    prop("Gacha Logs")
+      .filter(current.prop("Gacha Type") == "500")
       .length();
   ```
 
@@ -116,13 +120,26 @@
 もし「限定キャラ祈願の天井まであと何連か」を表示したい場合は、以下の数式を応用します。
 ※注：これは「ガチャ履歴 DB」にインポートする際、Python 側で「前回の星 5 からの経過数（Pity）」を計算して数値プロパティに保存している場合に有効です。
 
-- **プロパティ名**: `限定天井まで`
+- **プロパティ名**: `天井まで（限定キャラ）`
 - **数式例**:
+
   ```javascript
   "あと " +
     (90 -
       prop("Gacha Logs")
         .filter(current.prop("Gacha Type") == "301")
+        .last()
+        .prop("Pity")) +
+    " 連";
+  ```
+
+- **プロパティ名**: `天井まで（限定武器）`
+- **数式例**:
+  ```javascript
+  "あと " +
+    (90 -
+      prop("Gacha Logs")
+        .filter(current.prop("Gacha Type") == "302")
         .last()
         .prop("Pity")) +
     " 連";
