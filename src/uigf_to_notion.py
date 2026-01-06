@@ -5,7 +5,8 @@ from constants import (
     GACHA_LOG_DB_ID, SETTINGS_DB_ID, MASTER_DB_ID, MAX_IMPORT_LIMIT
 )
 from utils import (
-    load_cache, save_cache, parse_uigf_json, normalize_item_for_notion
+    load_cache, save_cache, parse_uigf_json, normalize_item_for_notion,
+    calculate_pity
 )
 
 def validate_notion_duplicates(notion):
