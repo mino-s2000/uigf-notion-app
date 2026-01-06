@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+.env
+
+# Project specific caches and data
+uigf_cache.json
+item_master_map.json
+
+# UIGF data files (Import/Export files)
+UIGF-Schema/
+uigf-*.json
+uigf_v*.json
+
+# Temporary scripts
+temp_*.py
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store
+
+# Virtual Environment
+.venv/
+
