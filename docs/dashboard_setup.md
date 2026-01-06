@@ -10,21 +10,21 @@
 
 アカウント全体の累計ガチャ回数を算出します。
 
-- **プロパティ名**: `合計回数`
+- **プロパティ名**: `合計ガチャ回数`
 - **数式**:
   ```javascript
-  prop("ガチャ履歴").length();
+  prop("Gacha Logs").length();
   ```
 
 ### ② 星 5 当選数
 
 星 5 をいくつ引いたかを算出します。
 
-- **プロパティ名**: `★5合計`
+- **プロパティ名**: `★5数`
 - **数式**:
   ```javascript
-  prop("ガチャ履歴")
-    .filter(current.prop("rank_type") == "5")
+  prop("Gacha Logs")
+    .filter(current.prop("Rank") == "5")
     .length();
   ```
 
@@ -37,7 +37,7 @@
   ```javascript
   let(
     type,
-    prop("gacha_type"),
+    prop("Gacha Type"),
     ifs(
       type == "500",
       "集録祈願",
@@ -61,9 +61,9 @@
 - **プロパティ名**: `平均運`
 - **数式**:
   ```javascript
-  let(count, prop("★5合計"),
+  let(count, prop("★5数"),
     if(count > 0,
-      round(prop("合計回数") / count * 10) / 10 + " 連/★5",
+      round(prop("合計ガチャ回数") / count * 10) / 10 + " 連/★5",
       "データなし"
     )
   )
@@ -77,19 +77,19 @@
 - **数式**:
   ```javascript
   "限定: " +
-    prop("ガチャ履歴")
+    prop("Gacha Logs")
       .filter(
-        current.prop("gacha_type") == "301" ||
-          current.prop("gacha_type") == "400"
+        current.prop("Gacha Type") == "301" ||
+          current.prop("Gacha Type") == "400"
       )
       .length() +
     " / 武器: " +
-    prop("ガチャ履歴")
-      .filter(current.prop("gacha_type") == "302")
+    prop("Gacha Logs")
+      .filter(current.prop("Gacha Type") == "302")
       .length() +
     " / 恒常: " +
-    prop("ガチャ履歴")
-      .filter(current.prop("gacha_type") == "200")
+    prop("Gacha Logs")
+      .filter(current.prop("Gacha Type") == "200")
       .length();
   ```
 
@@ -104,8 +104,8 @@
 3.  **表示するプロパティ**:
     - `Game`（セレクト型）
     - `UID`
-    - `合計回数`
-    - `★5合計`
+    - `合計ガチャ回数`
+    - `★5数`
     - `平均運`
 4.  **カードの並び替え**: `Game` ごとにグループ化するか、`名前` で昇順に設定。
 
@@ -121,8 +121,8 @@
   ```javascript
   "あと " +
     (90 -
-      prop("ガチャ履歴")
-        .filter(current.prop("gacha_type") == "301")
+      prop("Gacha Logs")
+        .filter(current.prop("Gacha Type") == "301")
         .last()
         .prop("Pity")) +
     " 連";
